@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from .models import Contact,Blog,Category
+
+# from .models import Blog
+
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -7,16 +10,26 @@ from hitcount.views import HitCountDetailView
 
 
 class BlogDetailView(HitCountDetailView):
-    model = Blog        # your model goes here
-    count_hit = True    # set to True if you want it to try and count the hit
+    model = Blog        
+    count_hit = True  
     context_object_name = 'blog'
     template_name = 'publication.html'
     
+    # slug_field ='slug'
+# def blog_list(request):
+#     blogs = Blog.objects.all()
+#     return render(request, 'blog_list.html', {'blogs': blogs})
+
+
+
+
+
+
     
-# def blog_detail_view(request,id):
-#     blog = Blog.objects.get(id=id)
-#     context = {"blog":blog}
-#     return render(request, 'publication.html',context)
+def blog_detail_view(request,id):
+    blog = Blog.objects.get(id=id)
+    context = {"blog":blog}
+    return render(request, 'publication.html',context)
 
 def blog_view(request):
     blogs = Blog.objects.all()
